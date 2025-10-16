@@ -10,17 +10,45 @@ SELECT * FROM alumnos ORDER BY fecha_nacimiento DESC;
 -- Seleccionar los primeros 3
 SELECT * FROM alumnos ORDER BY fecha_nacimiento ASC LIMIT 3;
 
--- Seleccionar todas las columnas, filtar sobre fecha_nacimiento
+----------------------------------------------------------------------
+-- Comparison Operators: https://www.postgresql.org/docs/current/functions-comparison.html
+-- igual a
+SELECT * FROM alumnos WHERE dni = '23451234J';
+
+-- no igual a
+SELECT * FROM alumnos WHERE dni <> '23451234J';
+SELECT * FROM alumnos WHERE dni != '23451234J';
+
+-- Seleccionar fecha_nacimiento mayor que ">"
 SELECT * FROM alumnos WHERE fecha_nacimiento > '2003-03-01';
 
+-- Seleccionar fecha_nacimiento menor que "<"
+SELECT * FROM alumnos WHERE fecha_nacimiento < '2003-03-01';
 
--- Seleccionar solo unas columnas
+-- Seleccionar fecha_nacimiento ENTRE (inclusivo)
+SELECT * FROM alumnos WHERE fecha_nacimiento BETWEEN '2003-01-01' AND '2003-02-09';
+
+-- Comentarios no tiene valor (NULL)
+SELECT * FROM alumnos WHERE comentarios IS NULL;
+
+-- Tiene valor
+SELECT * FROM alumnos WHERE comentarios IS NOT NULL;
+
+----------------------------------------------------------------------------
+-- Columnas
+-- Seleccionar todas las columnas
+SELECT * FROM alumnos;
+
+
+-- Seleccionar columnas específicas
 SELECT dni, nombre, apellidos FROM alumnos;
 
 -- Combinar nombre y apellidos
 SELECT dni, concat(nombre, ' ', apellidos) AS nombre_completo FROM alumnos;
 
 
+----------------------------------------------------------------------
+-- JOINS: https://www.postgresql.org/docs/current/queries-table-expressions.html#QUERIES-JOIN
 -- Seleccionar de cursos y matriculas, juntarlas usando id_curso/id_curso
 SELECT cursos.id_curso, cursos.nombre, matriculas.id_alumno
 FROM cursos INNER JOIN matriculas 

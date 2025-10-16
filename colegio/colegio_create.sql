@@ -21,10 +21,12 @@ CREATE TABLE alumnos(
 	dni VARCHAR(20) PRIMARY KEY,
 	nombre VARCHAR(100) NOT NULL,
 	apellidos VARCHAR(100) NOT NULL,
-	fecha_nacimiento DATE NOT NULL,
+	fecha_nacimiento DATE NOT NULL CONSTRAINT chk_edad CHECK (fecha_nacimiento > '2000-01-01'),
 	email VARCHAR(100) NOT NULL
 );
 
+-- Añadir una columna tipo 'text' (cadena ilimitada), permite NULL
+ALTER TABLE alumnos ADD COLUMN comentarios text;
 
 
 -- cursos ----------------------------------------------------------------

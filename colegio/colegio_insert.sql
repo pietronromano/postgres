@@ -6,15 +6,15 @@ SET search_path = colegio;
 
 -- alumnos ----------------------------------------------------------------
 insert into alumnos
-	(dni, nombre, apellidos, fecha_nacimiento, email)
+	(dni, nombre, apellidos, fecha_nacimiento, email, comentarios)
 VALUES
-	('76983214G', 'Juan', 'Romero', '2003-02-09', 'juanromero@gmail.com'),
-	('23451234J', 'Pablo', 'Guzman', '2003-12-23', 'pablog@gmail.com'),
-	('90078432Y', 'Julian', 'Martin', '2003-08-16', 'juanromero@gmail.com'),
-	('54678908I', 'Javier', 'Maroto', '2003-12-12', 'javierm@gmail.com'),
-	('55467234X', 'Alvaro', 'Sotogrande', '2003-04-19', 'alvaros@gmail.com'),
-	('45457890G', 'Felipe', 'Cano', '2003-07-28', 'felipec@gmail.com'),
-	('34126789K', 'Andres', 'Penelope', '2003-10-11', 'andresp@gmail.com');
+	('76983214G', 'Juan', 'Romero', '2003-02-09', 'juanromero@gmail.com',NULL),
+	('23451234J', 'Pablo', 'Guzman', '2003-12-23', 'pablog@gmail.com',NULL),
+	('90078432Y', 'Julian', 'Martin', '2003-08-16', 'juanromero@gmail.com',NULL),
+	('54678908I', 'Javier', 'Maroto', '2003-12-12', 'javierm@gmail.com','un comentario...'),
+	('55467234X', 'Alvaro', 'Sotogrande', '2003-04-19', 'alvaros@gmail.com','otro comentario...'),
+	('45457890G', 'Felipe', 'Cano', '2003-07-28', 'felipec@gmail.com','un comentario...'),
+	('34126789K', 'Andres', 'Penelope', '2003-10-11', 'andresp@gmail.com','otro comentario...');
 
 SELECT * FROM alumnos;
 
