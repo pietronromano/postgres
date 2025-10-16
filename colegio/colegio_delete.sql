@@ -31,6 +31,3 @@ DELETE FROM matriculas  WHERE id_matricula = 10;
 --Ahora funciona
 DELETE FROM alumnos  WHERE dni = '9999999';
 
-
-
-SELECT * FROM alumnos WHERE dni = '9999999';
