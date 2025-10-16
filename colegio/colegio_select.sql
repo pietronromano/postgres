@@ -7,6 +7,9 @@ SELECT * FROM alumnos ORDER BY fecha_nacimiento ASC;
 -- Orden descendiente
 SELECT * FROM alumnos ORDER BY fecha_nacimiento DESC;
 
+-- Seleccionar los primeros 3
+SELECT * FROM alumnos ORDER BY fecha_nacimiento ASC LIMIT 3;
+
 -- Seleccionar todas las columnas, filtar sobre fecha_nacimiento
 SELECT * FROM alumnos WHERE fecha_nacimiento > '2003-03-01';
 
