@@ -1,5 +1,6 @@
--- fijar el Schema por defecto
-SET search_path = colegio; 
+-- fijar el Schema por defecto, dos maneras
+SET search_path = colegio;
+SET search_path TO colegio; 
 
 -- Seleccionar todas las columnas, ordenar por fecha_nacimiento
 SELECT * FROM alumnos ORDER BY fecha_nacimiento ASC;
@@ -31,7 +32,7 @@ SELECT * FROM alumnos WHERE fecha_nacimiento BETWEEN '2003-01-01' AND '2003-02-0
 -- Comentarios no tiene valor (NULL)
 SELECT * FROM alumnos WHERE comentarios IS NULL;
 
--- Tiene valor
+-- Tiene valor (IS NOT NULL)
 SELECT * FROM alumnos WHERE comentarios IS NOT NULL;
 
 ----------------------------------------------------------------------------
