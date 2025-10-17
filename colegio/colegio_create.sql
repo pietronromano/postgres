@@ -1,3 +1,7 @@
+/*
+    
+    ###############################################################
+*/
 -- Schema por defecto es "public"
 SHOW search_path;
 -- fijar el Schema por defecto, donde se crean las tablas

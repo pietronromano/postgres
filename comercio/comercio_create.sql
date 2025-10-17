@@ -1,3 +1,8 @@
+/*
+    Crear tablas y relaciones
+    ###############################################################
+*/
+
 -- Schema por defecto es "public"
 SHOW search_path;
 -- fijar el Schema por defecto, donde se crean las tablas
@@ -5,9 +10,9 @@ SET search_path = comercio;
 
 -- Eliminar tablas y esquema si ya existen: permite empezar de cero
 DROP TABLE IF EXISTS pedidos_productos; -- 
+DROP TABLE IF EXISTS productos; --  que le hace referencia
 DROP TABLE IF EXISTS categorias;
 DROP TABLE IF EXISTS pedidos; -- quitar esta primero, porque hace referencia a otras
-DROP TABLE IF EXISTS productos; --  que le hace referencia
 DROP TABLE IF EXISTS clientes; -- quitar esta primero, porque hace referencia a otras
 
 
@@ -28,22 +33,24 @@ CREATE TABLE clientes (
 );
 
 CREATE TABLE categorias (
-    id_categoria SERIAL PRIMARY KEY,
+    id_categoria integer PRIMARY KEY,
     nombre varchar(50) NOT NULL,
-    padre integer,
-    comentarios text
+    id_padre integer, -- referencia recursiva
+    comentarios text,
+    CONSTRAINT fk_padre FOREIGN KEY (id_padre) REFERENCES categorias(id_categoria)
+
 );
 
 
 CREATE TABLE productos (
-    id_producto UUID PRIMARY KEY,
+    id_producto UUID PRIMARY KEY DEFAULT uuidv4(),
     nombre varchar(50) NOT NULL,
     descripcion varchar(250) NOT NULL,
     id_categoria integer NOT NULL,
-    comentarios text,
-    fecha_alta DATE,
+    fecha_alta DATE NOT NULL,
     activo bool DEFAULT true,
     precio numeric DEFAULT 9.99 NOT NULL,
+    comentarios text,
 
     CONSTRAINT fk_categoria FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria)
 );

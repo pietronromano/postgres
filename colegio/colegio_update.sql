@@ -1,3 +1,8 @@
+/*
+    
+    ###############################################################
+*/
+
 -- fijar el Schema por defecto
 SET search_path = colegio; 
 

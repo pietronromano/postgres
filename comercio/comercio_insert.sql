@@ -1,57 +1,54 @@
----TODO - change from colegio
+/*
+    Insertar registros
+    ###############################################################
+*/
 
 -- Schema por defecto es "public"
 SHOW search_path;
 -- fijar el Schema por defecto, donde se crean las tablas
 SET search_path = comercio; 
 
+-- categorias
+INSERT INTO categorias
+	(id_categoria, nombre, id_padre, comentarios)
+VALUES
+	(1, 'Electrónica', NULL, 'Primer Nivel'),
+	(2, 'Muebles', NULL, 'Primer Nivel'),
+	(4, 'PCs', 1, 'Segundo Nivel'),
+	(5, 'Tabletas', 2, 'Tercer Nivel'),
+	(6, 'Portátiles', 4,'Tercer Nivel'),
+	(7, 'Mesas', 2,'Segundo Nivel'),
+    (8, 'Camas', 2,'Segundo Nivel')
+    RETURNING *;
+
+
+
 -- productos
+-- Omitir id_producto, ya que tiene valor por defecto uuidv4()
+INSERT INTO productos
+    (nombre,descripcion, id_categoria ,fecha_alta,activo,precio,comentarios)
+VALUES
+	('Portátil 1', 'Un Portátil', 4, '2025-04-01',TRUE, 1000,'Commentarios Portátil 1'),
+	('Portátil 2', 'Un Portátil', 4, '2025-04-01',TRUE,2000,'Commentarios Portátil 2'),
+    ('Mesa 1', 'Una Mesa', 7, '2025-07-01',TRUE,700,'Commentarios Mesa 1'),
+    ('Cama 1', 'Una Cama', 8, '2025-08-01',FALSE,800,'Commentarios Cama 2'),
+    ('Tableta 1', 'Una Tableta', 5, '2025-05-01',FALSE,500,'Commentarios Tableta 1')
+    RETURNING *;
 
-
-CREATE TABLE clientes (
-    id_cliente SERIAL PRIMARY KEY,
-    nombres varchar(50) NOT NULL,
-	apellidos varchar(50) NOT NULL,
-
-    comentarios text,
-    fecha_alta DATE DEFAULT CURRENT_DATE NOT NULL,
-    activo bool DEFAULT true
-);
 -- clientes ----------------------------------------------------------------
-insert into clientes
+INSERT INTO clientes
 	(nif,nombres, apellidos, fecha_alta, activo, comentarios)
 VALUES
-	('76983214G', 'Juan', 'Romero', '2003-02-09', 'juanromero@gmail.com',NULL),
-	('23451234J', 'Pablo', 'Guzman', '2003-12-23', 'pablog@gmail.com',NULL),
-	('90078432Y', 'Julian', 'Martin', '2003-08-16', 'juanromero@gmail.com',NULL),
-	('54678908I', 'Javier', 'Maroto', '2003-12-12', 'javierm@gmail.com','un comentario...'),
-	('55467234X', 'Alvaro', 'Sotogrande', '2003-04-19', 'alvaros@gmail.com','otro comentario...'),
-	('45457890G', 'Felipe', 'Cano', '2003-07-28', 'felipec@gmail.com','un comentario...'),
-	('34126789K', 'Andres', 'Penelope', '2003-10-11', 'andresp@gmail.com','otro comentario...');
-
-SELECT * FROM clientes;
-
-
-CREATE TABLE categorias (
-    id_categoria SERIAL PRIMARY KEY,
-    nombre varchar(50) NOT NULL,
-    padre integer,
-    comentarios text
-);
+	('11111111A', 'Nombres1', 'Apellidos1', '2001-01-01', TRUE,'Commentarios 1'),
+	('22222222A', 'Nombres2', 'Apellidos2', '2001-02-01', FALSE,'Commentarios 2'),
+	('33333333A', 'Nombres3', 'Apellidos3', '2001-03-01', TRUE,'Commentarios 3'),
+	('44444444A', 'Nombres4', 'Apellidos4', '2001-04-01', FALSE,'Commentarios 4'),
+	('55555555A', 'Nombres5', 'Apellidos5', '2001-05-01', TRUE,'Commentarios 5'),
+	('66666666A', 'Nombres6', 'Apellidos6', '2001-06-01', FALSE,'Commentarios 6'),
+	('77777777A', 'Nombres7', 'Apellidos7', '2001-07-01', TRUE,'Commentarios 7')
+    RETURNING *;
 
 
-CREATE TABLE productos (
-    id_producto UUID PRIMARY KEY,
-    nombre varchar(50) NOT NULL,
-    descripcion varchar(250) NOT NULL,
-    id_categoria integer NOT NULL,
-    comentarios text,
-    fecha_alta DATE,
-    activo bool DEFAULT true,
-    precio numeric DEFAULT 9.99 NOT NULL,
-
-    CONSTRAINT fk_categoria FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria)
-);
 
 
 CREATE TABLE pedidos (

@@ -1,3 +1,8 @@
+/*
+    
+    ###############################################################
+*/
+
 -- fijar el Schema por defecto, dos maneras
 SET search_path = colegio;
 SET search_path TO colegio; 
@@ -34,6 +39,9 @@ SELECT * FROM alumnos WHERE comentarios IS NULL;
 
 -- Tiene valor (IS NOT NULL)
 SELECT * FROM alumnos WHERE comentarios IS NOT NULL;
+
+-- Si la columns comentarios contiene 'comentario' con cualquier número de characteres antes o después
+SELECT * FROM alumnos WHERE comentarios LIKE '%comentario%';
 
 ----------------------------------------------------------------------------
 -- Columnas
