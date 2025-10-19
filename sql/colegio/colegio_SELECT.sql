@@ -2,11 +2,10 @@
     
     ###############################################################
 */
----TODO - change from colegio
 
 -- fijar el Schema por defecto, dos maneras
-SET search_path = comercio;
-SET search_path TO comercio; 
+SET search_path = colegio;
+SET search_path TO colegio; 
 
 -- Seleccionar todas las columnas, ordenar por fecha_nacimiento
 SELECT * FROM alumnos ORDER BY fecha_nacimiento ASC;
@@ -14,8 +13,8 @@ SELECT * FROM alumnos ORDER BY fecha_nacimiento ASC;
 -- Orden descendiente
 SELECT * FROM alumnos ORDER BY fecha_nacimiento DESC;
 
--- Seleccionar los primeros 3
-SELECT * FROM alumnos ORDER BY fecha_nacimiento ASC LIMIT 3;
+-- Ordenar por 2 columnas, Seleccionar los primeros 3
+SELECT * FROM alumnos ORDER BY nombre,fecha_nacimiento ASC LIMIT 3;
 
 ----------------------------------------------------------------------
 -- Comparison Operators: https://www.postgresql.org/docs/current/functions-comparison.html
@@ -35,11 +34,20 @@ SELECT * FROM alumnos WHERE fecha_nacimiento < '2003-03-01';
 -- Seleccionar fecha_nacimiento ENTRE (inclusivo)
 SELECT * FROM alumnos WHERE fecha_nacimiento BETWEEN '2003-01-01' AND '2003-02-09';
 
+
+-- Seleccionar varios appelidos 
+SELECT * FROM alumnos WHERE apellidos IN ('Maroto','Cano','Penelope');
+
+
+
 -- Comentarios no tiene valor (NULL)
 SELECT * FROM alumnos WHERE comentarios IS NULL;
 
 -- Tiene valor (IS NOT NULL)
 SELECT * FROM alumnos WHERE comentarios IS NOT NULL;
+
+-- Si la columns comentarios contiene 'comentario' con cualquier número de characteres antes o después
+SELECT * FROM alumnos WHERE comentarios LIKE '%comentario%';
 
 ----------------------------------------------------------------------------
 -- Columnas
@@ -51,11 +59,14 @@ SELECT * FROM alumnos;
 SELECT dni, nombre, apellidos FROM alumnos;
 
 -- Combinar nombre y apellidos
-SELECT dni, concat(nombre, ' ', apellidos) AS nombre_completo FROM alumnos;
+SELECT dni, CONCAT(nombre, ' ', apellidos) AS nombre_completo FROM alumnos;
 
 
 ----------------------------------------------------------------------
--- JOINS: https://www.postgresql.org/docs/current/queries-table-expressions.html#QUERIES-JOIN
+/*
+    JOINS: https://www.postgresql.org/docs/current/queries-table-expressions.html#QUERIES-JOIN
+*/
+
 -- Seleccionar de cursos y matriculas, juntarlas usando id_curso/id_curso
 SELECT cursos.id_curso, cursos.nombre, matriculas.id_alumno
 FROM cursos INNER JOIN matriculas 

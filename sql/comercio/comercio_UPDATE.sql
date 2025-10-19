@@ -1,8 +1,7 @@
 /*
-    
+    ---TODO - change from colegio
     ###############################################################
 */
----TODO - change from colegio
 
 -- fijar el Schema por defecto
 SET search_path = comercio; 

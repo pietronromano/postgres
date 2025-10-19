@@ -8,7 +8,7 @@ SHOW search_path;
 -- fijar el Schema por defecto, donde se crean las tablas
 SET search_path = comercio; 
 
--- categorias
+-- categorias  ----------------------------------------------------------------
 INSERT INTO categorias
 	(id_categoria, nombre, id_padre, comentarios)
 VALUES
@@ -23,7 +23,7 @@ VALUES
 
 
 
--- productos
+-- productos  ----------------------------------------------------------------
 -- Omitir id_producto, ya que tiene valor por defecto uuidv4()
 INSERT INTO productos
     (nombre,descripcion, id_categoria ,fecha_alta,activo,precio,comentarios)
@@ -48,25 +48,27 @@ VALUES
 	('77777777A', 'Nombres7', 'Apellidos7', '2001-07-01', TRUE,'Commentarios 7')
     RETURNING *;
 
+-- pedidos --------------------------------------------
+INSERT INTO pedidos
+	(id_cliente,fecha,pagado,comentarios)
+VALUES
+	(1, '2001-01-01', TRUE,'Commentarios 1'),
+	(2, '2001-02-01', FALSE,'Commentarios 2'),
+	(3, '2001-03-01', TRUE,'Commentarios 3'),
+	(4, '2001-04-01', FALSE,'Commentarios 4'),
+	(5, '2001-05-01', TRUE,'Commentarios 5'),
+	(6, '2001-06-01', FALSE,'Commentarios 6'),
+	(7, '2001-07-01', TRUE,'Commentarios 7')
+	RETURNING *;
 
 
-
-CREATE TABLE pedidos (
-    id_pedido SERIAL PRIMARY KEY,
-	id_cliente integer NOT NULL,
-    fecha DATE DEFAULT CURRENT_DATE NOT NULL,
-    pagado bool DEFAULT false,
-	comentarios text,
-
-    CONSTRAINT fk_cliente FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente)
-);
-
-CREATE TABLE pedidos_productos (
-    id_pedido integer NOT NULL,
-	id_producto UUID NOT NULL,
-    cantidad integer NOT NULL CONSTRAINT chk_cantidad CHECK (cantidad > 0),
-	comentarios text,
-    PRIMARY KEY (id_pedido, id_producto),
-    CONSTRAINT fk_producto FOREIGN KEY (id_producto) REFERENCES productos(id_producto),
-	CONSTRAINT fk_pedido FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido)
-);
+-- pedidos_productos ----------------------------------
+INSERT INTO pedidos_productos
+	(id_pedido, id_producto, cantidad,comentarios)
+VALUES
+	(1,'be3de19e-f6ee-4393-8b6b-23bfbf3ee9f5',1,'Comentarios 1'),
+	(2,'28d588a9-e201-4fa8-92f5-0296c2b4598f',2,'Comentarios 2'),
+	(3,'9dfc4978-1584-49c9-894d-be3a03b6a8ec',3,'Comentarios 3'),
+	(4,'084716de-c637-4d62-9b97-10c3ec227a6d',4,'Comentarios 4'),
+	(5,'df954bea-2743-4d72-b12b-d38537a8b2f2',5,'Comentarios 5')
+	RETURNING *;

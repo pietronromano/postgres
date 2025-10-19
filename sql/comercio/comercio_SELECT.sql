@@ -1,11 +1,11 @@
 /*
-    
+    ---TODO - change from colegio
     ###############################################################
 */
 
 -- fijar el Schema por defecto, dos maneras
-SET search_path = colegio;
-SET search_path TO colegio; 
+SET search_path = comercio;
+SET search_path TO comercio; 
 
 -- Seleccionar todas las columnas, ordenar por fecha_nacimiento
 SELECT * FROM alumnos ORDER BY fecha_nacimiento ASC;
@@ -39,9 +39,6 @@ SELECT * FROM alumnos WHERE comentarios IS NULL;
 
 -- Tiene valor (IS NOT NULL)
 SELECT * FROM alumnos WHERE comentarios IS NOT NULL;
-
--- Si la columns comentarios contiene 'comentario' con cualquier número de characteres antes o después
-SELECT * FROM alumnos WHERE comentarios LIKE '%comentario%';
 
 ----------------------------------------------------------------------------
 -- Columnas

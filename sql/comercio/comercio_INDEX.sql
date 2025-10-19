@@ -17,7 +17,15 @@ DROP INDEX IF EXISTS idx_productos_nombre;
     VER: 
         - https://www.postgresql.org/docs/18/using-explain.html
         - https://www.postgresql.org/docs/18/sql-explain.html
+    
+    - EXPLAIN: estima el coste, pero NO ejecuta la consulta
+    - EXPLAIN ANALYZE: estima el coste, SÍ ejecuta la consulta y entonces muestra el tiempo real
+
+    - Results:
+        -> Seq Scan: sequential scan on the TABLE - so not using the index: BAD!
+        -> Index Scan: using the index: GOOD!
 */
+
 EXPLAIN ANALYZE SELECT * FROM productos WHERE nombre = 'Una Tableta';
     --> Seq Scan on productos  (cost=0.00..11.25 rows=1 width=723)
 
