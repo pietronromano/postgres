@@ -63,6 +63,7 @@ VALUES
 
 
 -- pedidos_productos ----------------------------------
+-- NOTA: id_producto cambiará según GUIDs generados para los productos
 INSERT INTO pedidos_productos
 	(id_pedido, id_producto, cantidad,comentarios)
 VALUES
