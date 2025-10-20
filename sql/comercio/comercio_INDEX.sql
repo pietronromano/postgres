@@ -20,13 +20,14 @@ DROP INDEX IF EXISTS idx_productos_nombre;
     
     - EXPLAIN: estima el coste, pero NO ejecuta la consulta
     - EXPLAIN ANALYZE: estima el coste, SÍ ejecuta la consulta y entonces muestra el tiempo real
+    - (VERBOSE ON) The VERBOSE option allows every node to report more detailed information, such as the list of the output columns, even when not specified.
 
     - Results:
         -> Seq Scan: sequential scan on the TABLE - so not using the index: BAD!
         -> Index Scan: using the index: GOOD!
 */
 
-EXPLAIN ANALYZE SELECT * FROM productos WHERE nombre = 'Una Tableta';
+EXPLAIN (VERBOSE ON) SELECT * FROM productos WHERE nombre = 'Una Tableta';
     --> Seq Scan on productos  (cost=0.00..11.25 rows=1 width=723)
 
 -- Crear el índice y repetir la consulta
@@ -41,3 +42,6 @@ EXPLAIN ANALYZE SELECT * FROM productos WHERE nombre = 'Una Cama';
     A multicolumn B-tree index can be used with query conditions that involve any subset of the index's columns, 
     but the index is most efficient when there are constraints on the leading (leftmost) columns.
 */
+TODO
+
+
