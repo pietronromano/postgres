@@ -6,17 +6,14 @@
 -- fijar el Schema por defecto
 SET search_path = comercio; 
 
-UPDATE alumnos SET apellidos = 'Romero Blanco' WHERE dni = '76983214G';
-SELECT * FROM alumnos WHERE dni = '76983214G';
-
---Intentar poner fecha_nacimiento < 2000, no está permitido
-UPDATE alumnos SET fecha_nacimiento = '1999-12-31' WHERE dni = '76983214G';
-    --new row for relation "alumnos" violates check constraint "chk_edad"
-    --DETAIL: Failing row contains (76983214G, Juan, Romero, 1999-12-31, juanromero@gmail.com, null).
-
-
-
 -- Usar "RETURNING" para obtener los nuevos valores automáticamente
-UPDATE matriculas SET fecha_matricula = '2025-11-01' WHERE id_matricula = 1
-RETURNING id_matricula, fecha_matricula;
+UPDATE clientes SET apellidos = 'Apellidos Modficado' WHERE nif = '11111111A'
+RETURNING *;
+
+
+--Intentar poner fecha_alta a NULL, no está permitido
+UPDATE clientes SET fecha_alta = NULL WHERE id_cliente = 1;
+    --null value in column "fecha_alta" of relation "clientes" violates not-null constraint
+    --DETAIL: Failing row contains (1, 11111111A, Nombres1, Apellidos Modficado, null, t, Commentarios 1).
+
 

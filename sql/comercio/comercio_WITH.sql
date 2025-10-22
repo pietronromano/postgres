@@ -7,37 +7,20 @@
         - https://www.postgresql.org/docs/18/queries-with.html
         - Learn PostreSQL - Second Edition, Chapter 5 Advanced Statements->  Exploring CTEs
 */
+SET search_path = comercio; 
 
-select * from tags order by pk;
- pk |        tag        | parent
-----+-------------------+--------
-  1 | Database          |  
-  2 | Operating Systems |  
-  3 | PostgreSQL        |      1
-(3 rows)
-
-level  |          tag      
--------+------------------------
-     1 | Database
-     1 | Operating Systems
-     2 | Database -> PostgreSQL
-To reach this goal, we have to perform the following:
-forumdb=> WITH RECURSIVE tags_tree AS (
- -- non recursive statement
-SELECT tag, pk, 1 AS level
-FROM tags WHERE parent IS NULL
-UNION
--- recursive statement
-SELECT tt.tag|| ' -> ' || ct.tag, ct.pk
-, tt.level + 1
-FROM tags ct
-JOIN tags_tree tt ON tt.pk = ct.parent
+--Recursive CTE para crear un árbol
+WITH RECURSIVE arbol_categorias AS (
+     -- non recursive statement: categories sin padre, nivel empieza en 0
+     -- CAST(categoria AS text) se requiere porque la expresión recursiva abajo es tipo "text": arbol_categorias.categoria || ' -> ' || categorias.categoria 
+     SELECT id_categoria,id_padre,CAST(categoria AS text) AS arbol, 0 AS nivel
+     FROM categorias WHERE id_padre IS NULL
+     UNION 
+     -- recursive statement
+     SELECT categorias.id_categoria, categorias.id_padre,arbol_categorias.arbol || ' -> ' || categorias.categoria,  arbol_categorias.nivel + 1
+     FROM categorias
+     JOIN arbol_categorias  ON arbol_categorias.id_categoria = categorias.id_padre
 )
-SELECT level,tag FROM tags_tree
-order by level;
- level |          tag      
--------+------------------------
-     1 | Database
-     1 | Operating Systems
-     2 | Database -> PostgreSQL
-(3 rows)
+SELECT id_categoria, id_padre, nivel, arbol FROM arbol_categorias
+order by nivel; 
+

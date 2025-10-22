@@ -32,15 +32,18 @@ CREATE TABLE clientes (
     comentarios text
 );
 
+-- referencia recursiva fk_padre para crear un árbol (ver comercio_WITH.sql)
 CREATE TABLE categorias (
     id_categoria integer PRIMARY KEY,
     nombre varchar(50) NOT NULL,
-    id_padre integer, -- referencia recursiva
+    id_padre integer, 
     comentarios text,
     CONSTRAINT fk_padre FOREIGN KEY (id_padre) REFERENCES categorias(id_categoria)
 
 );
 
+-- Example rename a column
+ALTER TABLE categorias RENAME COLUMN nombre TO categoria;
 
 CREATE TABLE productos (
     id_producto UUID PRIMARY KEY DEFAULT uuidv4(),
@@ -59,6 +62,9 @@ CREATE TABLE productos (
 CREATE TABLE pedidos (
     id_pedido SERIAL PRIMARY KEY,
 	id_cliente integer NOT NULL,
+    nif varchar(20) NOT NULL,
+    nombres varchar(50) NOT NULL,
+	apellidos varchar(50) NOT NULL,
     fecha DATE DEFAULT CURRENT_DATE NOT NULL,
     pagado bool DEFAULT false,
 	comentarios text,

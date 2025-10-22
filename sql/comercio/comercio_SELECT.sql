@@ -1,5 +1,5 @@
 /*
-    ---TODO - change from colegio
+    --Ejemplos de consultas
     ###############################################################
 */
 
@@ -7,70 +7,56 @@
 SET search_path = comercio;
 SET search_path TO comercio; 
 
--- Seleccionar todas las columnas, ordenar por fecha_nacimiento
-SELECT * FROM alumnos ORDER BY fecha_nacimiento ASC;
+-- Seleccionar todas las columnas, ordenar por fecha_alta
+SELECT * FROM clientes ORDER BY fecha_alta ASC;
 
 -- Orden descendiente
-SELECT * FROM alumnos ORDER BY fecha_nacimiento DESC;
+SELECT * FROM clientes ORDER BY fecha_alta DESC;
 
 -- Seleccionar los primeros 3
-SELECT * FROM alumnos ORDER BY fecha_nacimiento ASC LIMIT 3;
+SELECT * FROM clientes ORDER BY fecha_alta ASC LIMIT 3;
 
 ----------------------------------------------------------------------
 -- Comparison Operators: https://www.postgresql.org/docs/current/functions-comparison.html
 -- igual a
-SELECT * FROM alumnos WHERE dni = '23451234J';
+SELECT * FROM clientes WHERE nif = '11111111A';
 
 -- no igual a
-SELECT * FROM alumnos WHERE dni <> '23451234J';
-SELECT * FROM alumnos WHERE dni != '23451234J';
+SELECT * FROM clientes WHERE nif <> '11111111A';
+SELECT * FROM clientes WHERE nif != '11111111A';
 
--- Seleccionar fecha_nacimiento mayor que ">"
-SELECT * FROM alumnos WHERE fecha_nacimiento > '2003-03-01';
+-- Seleccionar fecha_alta mayor que ">"
+SELECT * FROM clientes WHERE fecha_alta > '2001-03-01';
 
--- Seleccionar fecha_nacimiento menor que "<"
-SELECT * FROM alumnos WHERE fecha_nacimiento < '2003-03-01';
+-- Seleccionar fecha_alta menor que "<"
+SELECT * FROM clientes WHERE fecha_alta < '2001-03-01';
 
--- Seleccionar fecha_nacimiento ENTRE (inclusivo)
-SELECT * FROM alumnos WHERE fecha_nacimiento BETWEEN '2003-01-01' AND '2003-02-09';
+-- Seleccionar fecha_alta ENTRE (inclusivo)
+SELECT * FROM clientes WHERE fecha_alta BETWEEN '2001-01-01' AND '2003-03-31';
 
 -- Comentarios no tiene valor (NULL)
-SELECT * FROM alumnos WHERE comentarios IS NULL;
+SELECT * FROM clientes WHERE comentarios IS NULL;
 
 -- Tiene valor (IS NOT NULL)
-SELECT * FROM alumnos WHERE comentarios IS NOT NULL;
+SELECT * FROM clientes WHERE comentarios IS NOT NULL;
 
 ----------------------------------------------------------------------------
 -- Columnas
 -- Seleccionar todas las columnas
-SELECT * FROM alumnos;
-
+SELECT * FROM clientes;
 
 -- Seleccionar columnas específicas
-SELECT dni, nombre, apellidos FROM alumnos;
+SELECT nif, nombre, apellidos FROM clientes;
 
 -- Combinar nombre y apellidos
-SELECT dni, concat(nombre, ' ', apellidos) AS nombre_completo FROM alumnos;
+SELECT nif, concat(nombres, ' ', apellidos) AS nombre_completo FROM clientes;
 
 
 ----------------------------------------------------------------------
 -- JOINS: https://www.postgresql.org/docs/current/queries-table-expressions.html#QUERIES-JOIN
--- Seleccionar de cursos y matriculas, juntarlas usando id_curso/id_curso
-SELECT cursos.id_curso, cursos.nombre, matriculas.id_alumno
-FROM cursos INNER JOIN matriculas 
-ON cursos.id_curso = matriculas.id_curso
-
--- Usar alias  c(cursos) m (matriculas) para abreviar las tablas
-SELECT c.id_curso, c.nombre, m.id_alumno
-FROM cursos AS c INNER JOIN matriculas AS m 
-ON c.id_curso = m.id_curso
-
--- Seleccionar de alumnos y matriculas, juntarlas usando dni/id_alumno
-SELECT alumnos.nombre, alumnos.apellidos, matriculas.id_curso, matriculas.fecha_matricula
-FROM alumnos INNER JOIN matriculas 
-ON alumnos.dni = matriculas.id_alumno
-
--- Usar alias a(alumnos) m(matriculas)
-SELECT a.nombre, a.apellidos, m.id_curso, m.fecha_matricula
-FROM alumnos AS a INNER JOIN matriculas AS m
-ON a.dni = m.id_alumno
+-- Seleccionar de clientes y pedidos
+SELECT 
+    clientes.id_cliente, nombres, clientes.apellidos, pedidos.fecha, pedidos.pagado
+FROM clientes 
+INNER JOIN pedidos 
+ON pedidos.id_cliente = pedidos.id_cliente;
