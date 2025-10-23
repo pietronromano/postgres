@@ -1,5 +1,8 @@
+/*
+    Trades DB - datos para consultas con GROUP BY, ROLLUP, WINDOWS
+    https://www.udemy.com/course/postgresqlmasterclass/learn/lecture/24231266#overview
+*/
 
--- Schema por defecto es "public"
 SHOW search_path;
 -- fijar el Schema por defecto, donde se crean las tablas
 SET search_path = trades; 
