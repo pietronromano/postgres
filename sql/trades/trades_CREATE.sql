@@ -1,0 +1,22 @@
+
+-- Schema por defecto es "public"
+SHOW search_path;
+-- fijar el Schema por defecto, donde se crean las tablas
+SET search_path = trades; 
+
+-- Eliminar tablas y esquema si ya existen: permite empezar de cero
+DROP TABLE IF EXISTS trades; -- quitar esta primero, porque hace referencia a otras
+
+-- Eliminar Schema último
+DROP SCHEMA IF EXISTS trades;
+
+-- Crear un Schema ----------------------------------------------------------------
+CREATE SCHEMA trades;
+
+CREATE TABLE trades (
+    region text,
+    country text,
+    year int,
+    imports numeric(50,0),
+    exports numeric(50,0)
+)
