@@ -3,8 +3,7 @@
     ###############################################################
 */
 
--- fijar el Schema por defecto, dos maneras
-SET search_path = comercio;
+-- fijar el Schema por defecto
 SET search_path TO comercio; 
 
 -- Seleccionar todas las columnas, ordenar por fecha_alta
@@ -52,6 +51,20 @@ SELECT nif, nombre, apellidos FROM clientes;
 SELECT nif, concat(nombres, ' ', apellidos) AS nombre_completo FROM clientes;
 
 
+-- CASE
+SELECT
+    id_producto,
+    nombre,
+    precio,
+    (
+        CASE
+            WHEN precio < 1000 THEN 'BARATO'
+            WHEN precio > 2000 THEN 'CARO'
+            ELSE 'NORMAL'
+        END
+    ) as rango_precio
+FROM productos;
+
 ----------------------------------------------------------------------
 -- JOINS: https://www.postgresql.org/docs/current/queries-table-expressions.html#QUERIES-JOIN
 -- Seleccionar de clientes y pedidos
@@ -60,3 +73,12 @@ SELECT
 FROM clientes 
 INNER JOIN pedidos 
 ON pedidos.id_cliente = pedidos.id_cliente;
+
+-- Seleccionar de clientes y sus productos comprados
+SELECT DISTINCT
+    clientes.id_cliente, productos.nombre as producto
+FROM clientes 
+INNER JOIN pedidos ON pedidos.id_cliente = pedidos.id_cliente
+INNER JOIN pedidos_productos ON pedidos_productos.id_pedido = pedidos.id_pedido
+INNER JOIN productos ON productos.id_producto = pedidos_productos.id_producto
+ORDER BY clientes.id_cliente,producto

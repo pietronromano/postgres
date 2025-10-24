@@ -32,7 +32,8 @@ VALUES
 	('Portátil 2', 'Un Portátil', 4, '2025-04-01',TRUE,2000,'Commentarios Portátil 2'),
     ('Mesa 1', 'Una Mesa', 7, '2025-07-01',TRUE,700,'Commentarios Mesa 1'),
     ('Cama 1', 'Una Cama', 8, '2025-08-01',FALSE,800,'Commentarios Cama 2'),
-    ('Tableta 1', 'Una Tableta', 5, '2025-05-01',FALSE,500,'Commentarios Tableta 1')
+    ('Tableta 1', 'Una Tableta', 5, '2025-05-01',FALSE,500,'Commentarios Tableta 1'),
+	('Portáitl Gaming', 'Potente', 4, '2025-06-01',FALSE,3000,'Commentarios Portáitl Gaming')
     RETURNING *;
 
 -- clientes ----------------------------------------------------------------

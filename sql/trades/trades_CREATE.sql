@@ -1,5 +1,6 @@
 /*
     Trades DB - datos para consultas con GROUP BY, ROLLUP, WINDOWS
+    https://comtradeplus.un.org/TradeFlow
     https://www.udemy.com/course/postgresqlmasterclass/learn/lecture/24231266#overview
 */
 

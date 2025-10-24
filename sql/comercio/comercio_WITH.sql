@@ -1,6 +1,3 @@
-
-
-
 /*
     WITH, CTEs
     REFS: 
@@ -9,7 +6,33 @@
 */
 SET search_path = comercio; 
 
---Recursive CTE para crear un árbol
+-- CTE
+WITH precios_productos AS (
+    SELECT
+    pedidos_productos.id_producto,
+    id_cliente,
+    nombre as nombre_producto,
+    precio,
+    (
+        CASE
+            WHEN precio < 1000 THEN 'BARATO'
+            WHEN precio > 2000 THEN 'CARO'
+            ELSE 'NORMAL'
+        END
+    ) as rango_precio
+    FROM productos
+    INNER JOIN pedidos_productos ON pedidos_productos.id_producto = productos.id_producto
+    INNER JOIN pedidos ON pedidos.id_pedido = pedidos_productos.id_pedido
+)
+SELECT DISTINCT
+    clientes.id_cliente, precios_productos.nombre_producto, precio, rango_precio
+FROM clientes 
+INNER JOIN precios_productos ON precios_productos.id_cliente = clientes.id_cliente;
+
+
+/*
+    Recursive CTE: para crear un árbol
+*/
 WITH RECURSIVE arbol_categorias AS (
      -- non recursive statement: categories sin padre, nivel empieza en 0
      -- CAST(categoria AS text) se requiere porque la expresión recursiva abajo es tipo "text": arbol_categorias.categoria || ' -> ' || categorias.categoria 
