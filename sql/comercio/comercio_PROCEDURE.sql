@@ -11,7 +11,7 @@ SET search_path TO comercio;
 -- pedidos_insert ------------------------------------------------
 DROP PROCEDURE IF EXISTS pedidos_insert;
 
-CREATE PROCEDURE pedidos_insert(num_pedidos integer) 
+CREATE OR REPLACE PROCEDURE pedidos_insert(num_pedidos integer) 
 LANGUAGE plpgsql
 AS $$
 DECLARE 
@@ -44,3 +44,4 @@ CALL pedidos_insert(5);
 SELECT pedidos.id_pedido, pedidos_productos.id_producto, pedidos_productos.cantidad FROM pedidos
 INNER JOIN pedidos_productos ON pedidos_productos.id_pedido = pedidos.id_pedido;
 
+SELECT * FROM clientes;
