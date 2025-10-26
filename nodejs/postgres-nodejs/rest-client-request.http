@@ -1,0 +1,30 @@
+#-Extension: REST Client Huachao Mao 6,441,581M
+
+# SELECT
+http://localhost:3005/clientes/
+
+### INSERT
+POST http://localhost:3005/clientes HTTP/1.1
+content-type: application/json
+
+{
+  "nif": "NNNNNN50",
+  "nombres": "nombres-50",
+  "apellidos": "apellidos-50",
+  "fechaAlta": "2020-01-01",
+  "activo": true,
+  "comentarios": "comentarios 50"
+}
+ 
+### UPDATE
+PUT http://localhost:3005/clientes/13 HTTP/1.1
+content-type: application/json
+
+{
+  "nombres": "nombres-50-UPDATED",
+  "apellidos": "apellidos-50-UPDATED"
+}
+
+### DELETE
+DELETE http://localhost:3005/clientes/13 HTTP/1.1
+content-type: application/json

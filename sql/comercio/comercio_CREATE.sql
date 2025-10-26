@@ -81,3 +81,12 @@ CREATE TABLE pedidos_productos (
     CONSTRAINT fk_producto FOREIGN KEY (id_producto) REFERENCES productos(id_producto),
 	CONSTRAINT fk_pedido FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido)
 );
+
+
+ CREATE TABLE users (
+      id SERIAL PRIMARY KEY,
+      created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+      bio VARCHAR(400),
+      username VARCHAR(30) NOT NULL
+    );
