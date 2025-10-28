@@ -49,6 +49,7 @@ VALUES
 	('77777777A', 'Nombres7', 'Apellidos7', '2001-07-01', TRUE,'Commentarios 7')
     RETURNING *;
 
+
 -- pedidos --------------------------------------------
 INSERT INTO pedidos
 	(id_cliente,fecha,pagado,comentarios)

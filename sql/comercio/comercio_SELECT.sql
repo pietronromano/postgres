@@ -45,7 +45,7 @@ SELECT * FROM clientes WHERE comentarios IS NOT NULL;
 SELECT * FROM clientes;
 
 -- Seleccionar columnas específicas
-SELECT nif, nombre, apellidos FROM clientes;
+SELECT nif, nombres, apellidos FROM clientes;
 
 -- Combinar nombre y apellidos
 SELECT nif, concat(nombres, ' ', apellidos) AS nombre_completo FROM clientes;

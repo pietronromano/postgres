@@ -54,7 +54,7 @@ CREATE TABLE productos (
     activo bool DEFAULT true,
     precio numeric DEFAULT 9.99 NOT NULL,
     comentarios text,
-
+ 
     CONSTRAINT fk_categoria FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria)
 );
 
