@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace PostgresEF.Data;
 
 
 public partial class ComercioContext : DbContext
 {
-    public ComercioContext()
+    string _connectionString;
+    public ComercioContext(string connectionString)
     {
+        _connectionString = connectionString;
     }
 
     public ComercioContext(DbContextOptions<ComercioContext> options)
         : base(options)
     {
+        _connectionString = "";
     }
 
     public virtual DbSet<Categoria> Categorias { get; set; }
@@ -33,12 +37,19 @@ public partial class ComercioContext : DbContext
 
     /*
     Gets called the first time the Db is queried
+    SEE: https://learn.microsoft.com/en-gb/ef/core/dbcontext-configuration/
     */
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-          => optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=12345;Database=postgres");
-  
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        optionsBuilder
+            .UseNpgsql(this._connectionString)
+            .EnableDetailedErrors() //More detailed query errors (at the expense of performance)
+            .EnableSensitiveDataLogging() //Allows seeing IDs when debugging 
+            .LogTo(Console.WriteLine, LogLevel.Trace);
+    }
+   
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {       
         modelBuilder.Entity<Categoria>(entity =>
         {
             entity.HasKey(e => e.IdCategoria).HasName("categorias_pkey");

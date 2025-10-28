@@ -1,4 +1,7 @@
 # Examples for DotNet with EntityFramework Core 10
+# COURSE EXAMPLE: 
+    - https://www.udemy.com/course/entity-framework-core-a-full-tour/
+    - https://github.com/trevoirwilliams/EntityFrameworkCoreFullTour
 # 26-Oct-2025
 
 # .Net 10 is required for EF 10: version 10.0.0-rc.2.25502.107
@@ -30,6 +33,8 @@ dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL --version 10.0.0-rc.2
 
 # NET console applications created using the dotnet new command template or Visual Studio by default don't expose configuration capabilities. 
 dotnet add package Microsoft.Extensions.Configuration --version 10.0.0-rc.2.25502.107;
+
+dotnet add package Microsoft.Extensions.Hosting --version 10.0.0-rc.2.25502.107;
 
 # Scaffolding (Reverse Engineering): https://learn.microsoft.com/en-gb/ef/core/managing-schemas/scaffolding/?tabs=dotnet-core-cli
 ## Set the DB, NOT the search_path (see --schema in next command)
