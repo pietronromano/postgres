@@ -21,12 +21,13 @@ CREATE SCHEMA colegio;
 
 
 -- alumnos ----------------------------------------------------------------
+-- Ejemplos de constraints: email no puede repetirse y fecha_nacimiento > 2000
 CREATE TABLE alumnos(
 	dni VARCHAR(20) PRIMARY KEY,
 	nombre VARCHAR(100) NOT NULL,
 	apellidos VARCHAR(100) NOT NULL,
 	fecha_nacimiento DATE NOT NULL CONSTRAINT chk_edad CHECK (fecha_nacimiento > '2000-01-01'),
-	email VARCHAR(100) NOT NULL
+	email VARCHAR(100) CONSTRAINT unique_email UNIQUE NOT NULL
 );
 
 -- Añadir una columna tipo 'text' (cadena ilimitada), permite NULL

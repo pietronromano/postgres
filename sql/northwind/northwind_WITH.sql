@@ -3,7 +3,7 @@
 
     SEE: 
         - https://www.udemy.com/course/postgresqlmasterclass/learn/lecture/24193332#overview
-        - https://www.postgresql.org/docs/18/queries-with.html
+        - https://www.postgresql.org/docs/current/queries-with.html
 */
 
 SET search_path TO northwind;

@@ -1,6 +1,17 @@
 /*
     GROUP BY examples with Northwind
-    SEE: https://www.udemy.com/course/postgresqlmasterclass/learn/lecture/24193332#overview
+    SEE: 
+        - https://www.postgresql.org/docs/18/queries-table-expressions.html#QUERIES-GROUP
+        - https://www.udemy.com/course/postgresqlmasterclass/learn/lecture/24193332#overview
+
+    After passing the WHERE filter, the derived input table might be subject to grouping, 
+    using the GROUP BY clause
+    and elimination of group rows using the HAVING clause.
+
+    SELECT select_list
+        FROM ...
+        [WHERE ...]
+        GROUP BY grouping_column_reference [, grouping_column_reference]...
 */
 
 SET search_path TO northwind;
@@ -23,6 +34,8 @@ SELECT
 FROM order_details
 ORDER BY order_id;
 
+
+
 -- Group by order_id to get one line per Order, with its total: 
 SELECT
     order_id,
@@ -40,6 +53,18 @@ FROM products p
 INNER JOIN categories c on c.category_id = p.category_id
 GROUP BY c.category_name
 ORDER BY total_products DESC;
+
+-- List freight charges in year 1997,  > 500
+SELECT
+    ship_country,
+    MAX(freight) AS max_freight
+FROM orders
+WHERE
+    order_date BETWEEN ('1997-01-01') AND ('1997-12-31')
+GROUP BY ship_country
+HAVING  MAX(freight) > 500
+ORDER BY max_freight DESC 
+
 
 -- List top 5 highest freight charges in year 1997
 SELECT
