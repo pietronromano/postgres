@@ -15,6 +15,7 @@
 --  To create a role use the CREATE ROLE SQL command:
 CREATE ROLE my_role;
  
+ 
 -- login privilege: Only roles that have the LOGIN attribute can be used as the initial role name for a database connection. 
 -- A role with the LOGIN attribute can be considered the same as a “database user”. 
 --To create a role with login privilege, use either:

@@ -1,6 +1,11 @@
 /*
-    
+    Crear tablas para la gestión de un colegio:
     ###############################################################
+
+	SEE:
+	- https://www.postgresql.org/docs/current/ddl-constraints.html
+	
+	CASCADE specifies that when a referenced row is deleted, row(s) referencing it should be automatically deleted as well.
 */
 -- Schema por defecto es "public"
 SHOW search_path;
@@ -50,17 +55,18 @@ CREATE TABLE matriculas(
 	
 	CONSTRAINT fk_alumno FOREIGN KEY (id_alumno) REFERENCES alumnos(dni),
 	CONSTRAINT fk_curso FOREIGN KEY (id_curso) REFERENCES cursos(id_curso)
+	
 );
 
 
---V2 matriculas con ID automático SERIAL----------------------------------------------------------------
+--V2 matriculas con ID automático SERIAL, ON DELETE CASCADE para eliminar automáticamente las matrículas al eliminar un alumno o curso----------------------------------------------------------------
 CREATE TABLE matriculas2(
 	id_matricula SERIAL PRIMARY KEY,
 	id_alumno VARCHAR(20) NOT NULL,
 	id_curso VARCHAR(5) NOT NULL,
 	fecha_matricula DATE DEFAULT CURRENT_DATE NOT NULL,
 	
-	CONSTRAINT fk_alumno FOREIGN KEY (id_alumno) REFERENCES alumnos(dni),
+	CONSTRAINT fk_alumno FOREIGN KEY (id_alumno) REFERENCES alumnos(dni) ON DELETE CASCADE,
 	CONSTRAINT fk_curso FOREIGN KEY (id_curso) REFERENCES cursos(id_curso)
 );
 
