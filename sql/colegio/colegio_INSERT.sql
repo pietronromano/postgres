@@ -10,6 +10,7 @@ SET search_path = colegio;
 
 
 -- alumnos ----------------------------------------------------------------
+-- id_alumno se genera automáticamente al ser SERIAL
 insert into alumnos
 	(dni, nombre, apellidos, fecha_nacimiento, email, comentarios)
 VALUES
@@ -29,40 +30,26 @@ SELECT * FROM alumnos;
 insert into cursos 
 	(id_curso, nombre)
 VALUES 
-	('1º', 'Primer Curso'), 
-	('2º', 'Segundo Curso');
+	('1', 'Primer Curso'), 
+	('2', 'Segundo Curso');
 
 SELECT * FROM cursos;
 
 
 -- matriculas ----------------------------------------------------------------
-
+-- id_matricula se genera automáticamente al ser SERIAL
 INSERT INTO matriculas
-	(id_matricula, id_alumno, id_curso)
+	( id_alumno, id_curso)
 VALUES  
-	(1, '76983214G', '1º'),
-	(2, '23451234J', '1º'),
-	(3, '90078432Y', '1º'),
-	(4, '54678908I', '2º'),
-	(5, '55467234X', '2º'),
-	(6, '45457890G', '2º'),
-	(7, '34126789K', '2º');
+	(1,  '1'),
+	(2,  '1'),
+	(3,  '1'),
+	(4,  '2'),
+	(5,  '2'),
+	(6,  '2'),
+	(7,  '2');
 
 SELECT * from matriculas;
 
 
---V2 matriculas con ID automático SERIAL----------------------------------------------------------------
 
---Insertar, no hace falta proporcionar el id_matricula
-INSERT INTO matriculas2
-	(id_alumno, id_curso)
-VALUES  
-	('76983214G', '1º'),
-	('23451234J', '1º'),
-	('90078432Y', '1º'),
-	('54678908I', '2º'),
-	('55467234X', '2º'),
-	('45457890G', '2º'),
-	('34126789K', '2º');
-
-SELECT * from matriculas2;

@@ -17,15 +17,15 @@ public class TestApp {
             myConn = connect();
             if (myConn == null)
                 return;
-
-            //select(myConn);
+            //Comment/uncomment the methods below to test:
+            select(myConn);
             //insert(myConn);
             //update(myConn);
             //delete(myConn);
             //preparedStatement(myConn);
             //storeProcedure(myConn);
             //transaction(myConn);
-            metadata(myConn);
+            //metadata(myConn);
             //writeBlob(myConn);
             //readBlob(myConn);
 
