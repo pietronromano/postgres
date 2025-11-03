@@ -16,9 +16,10 @@ VALUES
 SELECT * FROM alumnos WHERE dni = '9999999';
 
 INSERT INTO matriculas
-	(id_matricula, id_alumno, id_curso)
+	(id_alumno, id_curso)
 VALUES  
-	(10, '9999999', '1º');
+	( '9999999', '1º')
+RETURNING id_matricula;
 
 SELECT * FROM matriculas WHERE id_matricula = 10;
 

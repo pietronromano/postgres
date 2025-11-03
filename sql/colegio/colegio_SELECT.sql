@@ -3,6 +3,7 @@
     ###############################################################
 */
 
+
 -- fijar el Schema por defecto, dos maneras
 SET search_path = colegio;
 SET search_path TO colegio; 
@@ -14,7 +15,7 @@ SELECT * FROM alumnos ORDER BY fecha_nacimiento ASC;
 SELECT * FROM alumnos ORDER BY fecha_nacimiento DESC;
 
 -- Ordenar por 2 columnas, Seleccionar los primeros 3
-SELECT * FROM alumnos ORDER BY nombre,fecha_nacimiento ASC LIMIT 3;
+SELECT * FROM alumnos ORDER BY nombres,fecha_nacimiento ASC LIMIT 3;
 
 ----------------------------------------------------------------------
 -- Comparison Operators: https://www.postgresql.org/docs/current/functions-comparison.html
@@ -56,10 +57,10 @@ SELECT * FROM alumnos;
 
 
 -- Seleccionar columnas específicas
-SELECT dni, nombre, apellidos FROM alumnos;
+SELECT dni, nombres, apellidos FROM alumnos;
 
 -- Combinar nombre y apellidos
-SELECT dni, CONCAT(nombre, ' ', apellidos) AS nombre_completo FROM alumnos;
+SELECT dni, CONCAT(nombres, ' ', apellidos) AS nombre_completo FROM alumnos;
 
 
 ----------------------------------------------------------------------
@@ -78,7 +79,7 @@ FROM cursos AS c INNER JOIN matriculas AS m
 ON c.id_curso = m.id_curso
 
 -- Seleccionar de alumnos y matriculas, juntarlas usando dni/id_alumno
-SELECT alumnos.nombre, alumnos.apellidos, matriculas.id_curso, matriculas.fecha_matricula
+SELECT alumnos.nombres, alumnos.apellidos, matriculas.id_curso, matriculas.fecha_matricula
 FROM alumnos INNER JOIN matriculas 
 ON alumnos.dni = matriculas.id_alumno
 
