@@ -69,19 +69,45 @@ SELECT dni, CONCAT(nombres, ' ', apellidos) AS nombre_completo FROM alumnos;
     JOINS: https://www.postgresql.org/docs/current/queries-table-expressions.html#QUERIES-JOIN
 */
 
--- Seleccionar de alumnos y matriculas, juntarlas usando alumnos.id_alumno = matriculas.id_alumno
-SELECT alumnos.nombres, alumnos.apellidos, matriculas.id_curso, matriculas.fecha_matricula
-FROM alumnos INNER JOIN matriculas 
-ON alumnos.id_alumno = matriculas.id_alumno;
+/*
+    Requisito: Seleccionar alumnos y sus matriculas:
+    Tabla alumnos: id_alumno, dni, nombres, apellidos 
+    Tabla matriculas: id_matricula, id_curso, fecha_matricula
+*/
 
--- Usar alias a(alumnos) m(matriculas)
-SELECT a.nombres, a.apellidos, m.id_curso, m.fecha_matricula
-FROM alumnos AS a INNER JOIN matriculas AS m
-ON a.id_alumno = m.id_alumno;
+-- 1er paso: select de cada tabla por separado (incluir nombre de las tablas para evitar ambiguedad):
+-- Seleccionar de alumnos    
+SELECT 
+    alumnos.id_alumno, alumnos.nombres, alumnos.apellidos 
+FROM alumnos;
+
+-- Seleccionar de matriculas
+SELECT
+    matriculas.id_matricula, matriculas.id_alumno, matriculas.id_curso, matriculas.fecha_matricula 
+FROM matriculas;
+
+
+-- 2do paso: usar ALIAS para abreviar las tablas
+SELECT 
+    a.id_alumno, a.nombres, a.apellidos 
+FROM alumnos AS a;
+-- Seleccionar de matriculas
+SELECT 
+    m.id_matricula, m.id_curso, m.fecha_matricula 
+FROM matriculas AS m;
+
+
+-- 3er paso: listas las columnas de ambas tablas y luego juntar las tablase usando INNER JOIN
+SELECT 
+    a.id_alumno, a.nombres, a.apellidos,
+    m.id_matricula, m.id_curso, m.fecha_matricula  
+FROM alumnos AS a
+INNER JOIN matriculas AS m ON a.id_alumno = m.id_alumno;
 
 
 ----------------------------------------------------------------------
 
+-- Requisito: Seleccionar cursos y los alumnos matriculados en cada curso
 -- Seleccionar de cursos y matriculas, juntarlas usando cursos.id_curso = matriculas.id_curso
 SELECT cursos.id_curso, cursos.nombre, matriculas.id_alumno
 FROM cursos INNER JOIN matriculas 
