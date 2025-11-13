@@ -97,7 +97,7 @@ SELECT
 FROM matriculas AS m;
 
 
--- 3er paso: listas las columnas de ambas tablas y luego juntar las tablase usando INNER JOIN
+-- 3er paso: juntar la lista de las columnas de ambas tablas y luego juntar las tablas usando INNER JOIN
 SELECT 
     a.id_alumno, a.nombres, a.apellidos,
     m.id_matricula, m.id_curso, m.fecha_matricula  

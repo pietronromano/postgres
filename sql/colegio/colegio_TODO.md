@@ -1,5 +1,5 @@
 
 Modelar:
 - Asignaturas
-    - Una Asignatura asocia a un Curso
-    - Un Profesor imparte una Asignatura
+    - Una Asignatura se asocia a un Curso
+    - Un Profesor imparte una o varias Asignaturas
