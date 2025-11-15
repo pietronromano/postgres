@@ -10,7 +10,7 @@ BEGIN;
 -- Actualizar
 UPDATE clientes SET apellidos = 'Apellidos' WHERE nif = '11111111A';
 
---Se ve la actualización en esta sesión, pero no en otras
+--Se ve la actualización en esta sesión, pero no desde otras
 SELECT * FROM clientes  WHERE nif = '11111111A';
 
 -- Deshacer la transacción

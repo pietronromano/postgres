@@ -28,3 +28,6 @@ INNER JOIN productos ON productos.id_producto = pedidos_productos.id_producto
 ORDER BY clientes.id_cliente,producto;
 
 SELECT * FROM vw_clientes_productos;
+
+
+  
