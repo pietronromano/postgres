@@ -39,9 +39,8 @@ $$;
 
 
 -- Llamar al procedimiento
-CALL pedidos_insert(5);
+CALL pedidos_insert(10);
 
 SELECT pedidos.id_pedido, pedidos_productos.id_producto, pedidos_productos.cantidad FROM pedidos
 INNER JOIN pedidos_productos ON pedidos_productos.id_pedido = pedidos.id_pedido;
 
-SELECT * FROM clientes;
